@@ -1,0 +1,77 @@
+﻿@model IEnumerable<JobApplicationSystem.DAL.Model.EducationalDetails>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SSCPassingYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HSCPassingYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GraduationPassingYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostGraduationPassingYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsYearGap)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActiveBacklogs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcademicProjects)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserDetails)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SSCPassingYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HSCPassingYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GraduationPassingYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostGraduationPassingYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsYearGap)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActiveBacklogs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AcademicProjects)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserDetails.Email)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
