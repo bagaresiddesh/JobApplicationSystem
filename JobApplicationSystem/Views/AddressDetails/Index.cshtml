@@ -4,10 +4,18 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h4>List of Address Details</h4>
 
 <p>
     <a class="btn btn-primary btn-sm" asp-action="Index" asp-controller="Home">Back</a>
+</p>
+<p>
+    @using(@Html.BeginForm())
+    {
+        <label>Search for City, State or Country</label>
+        <input id="Search" name="Search" type="text"/>
+        <input type="submit" class="btn-primary " value="search"/>
+    }
 </p>
 <table class="table">
     <thead>

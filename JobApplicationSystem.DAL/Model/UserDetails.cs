@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace JobApplicationSystem.DAL.Model
@@ -10,14 +11,17 @@ namespace JobApplicationSystem.DAL.Model
 
         [Required]
         [MaxLength(20)]
+        [DisplayName("First Name")]
         public string FirstName { get; set; }
 
         [Required]
         [MaxLength(20)]
+        [DisplayName("Middle Name")]
         public string MiddleName { get; set; }
 
         [Required]
         [MaxLength(20)]
+        [DisplayName("Last Name")]
         public string LastName { get; set; }
 
         [Required]
@@ -25,6 +29,7 @@ namespace JobApplicationSystem.DAL.Model
 
         [Required]
         [DataType(DataType.Date)]
+        [DisplayName("Date of Birth")]
         public DateTime DateOfBirth { get; set; }
 
         [Required]

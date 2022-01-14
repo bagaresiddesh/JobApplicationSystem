@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using JobApplicationSystem.DAL.Model;
 using JobApplicationSystem.Service.Interface;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace JobApplicationSystem.Controllers
 {
@@ -15,9 +17,14 @@ namespace JobApplicationSystem.Controllers
         }
 
         // GET: AddressDetails
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
-            return View(_addressDetails.GetAll());
+            List<AddressDetails> result = _addressDetails.GetAll().ToList();
+            if (search != null)
+            {
+                result = result.Where(x => x.City.Contains(search) || x.State.Contains(search) || x.Country.Contains(search)).ToList();
+            }
+            return View(result);
         }
 
         // GET: AddressDetails/Details/5

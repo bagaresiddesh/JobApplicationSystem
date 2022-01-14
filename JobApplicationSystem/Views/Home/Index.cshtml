@@ -2,6 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,48 +38,8 @@
 
         <a class="btn btn-primary btn-sm" href="/AddressDetails/Index">Address Details</a>
 
-        <a class="btn btn-primary btn-sm" href="/EducationalDetails/Index">Educational Details</a><br><br>
+        <a class="btn btn-primary btn-sm" href="/EducationalDetails/Index">Educational Details</a><br><br>        
         
-        
-        
-        <table class="table" >
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Company</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="applications">
-            </tbody>
-        </table>
-
-        <div class="modal fade" id="modal-newApplication">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header"><h3>new application</h3></div>
-                    <div class="modal-body" id="newApplication">
-                        <div id="modal-err"></div>
-                        <div class="form-group">
-                            <label for="dateInput">Date</label>
-                            <input type="date" id="dateInput" class="form-control"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="companyInput">Company</label>
-                            <input type="text" placeholder="Nom de l'entreprise" class="form-control" id="companyInput"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="noteInput">Description (optional)</label>
-                            <textarea id="noteInput" rows="5" class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-success" onclick="newApplication()" id="modal-valid">Submit</button>
-                        <button class="btn btn-success" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 </div>
 </body>
 </html>
