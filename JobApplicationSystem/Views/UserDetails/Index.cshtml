@@ -15,11 +15,22 @@
         <label>Search for Name or Email</label>
         <input id="Search" name="Search" type="text"/>
         <input type="submit" class="btn-primary " value="search"/>
+    }     
+</p>
+<p>
+    @using(@Html.BeginForm())
+    {
+        <label>Delete by Id</label>
+        <input id="Delete" name="Delete" type="text"/>
+        <input type="submit" class="btn-primary " value="delete" />
     }
 </p>
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
@@ -33,7 +44,9 @@
                 @Html.DisplayNameFor(model => model.Gender)
             </th>
             <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">
                 @Html.DisplayNameFor(model => model.DateOfBirth)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
@@ -48,6 +61,9 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
             <td>
@@ -59,8 +75,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Gender)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            <td>            
+                @Html.DisplayFor(modelItem => item.DateOfBirth)                
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)

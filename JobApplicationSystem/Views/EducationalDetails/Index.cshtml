@@ -21,6 +21,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.UserDetailsId)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.SSCPassingYear)
             </th>
             <th>
@@ -47,6 +50,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserDetailsId)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SSCPassingYear)
             </td>

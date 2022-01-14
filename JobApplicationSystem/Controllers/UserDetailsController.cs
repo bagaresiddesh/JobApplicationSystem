@@ -4,6 +4,8 @@ using JobApplicationSystem.DAL.Model;
 using JobApplicationSystem.Service.Interface;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore.Internal;
+using System;
 
 namespace JobApplicationSystem.Controllers
 {
@@ -17,12 +19,37 @@ namespace JobApplicationSystem.Controllers
         }
 
         // GET: UserDetails
-        public IActionResult Index(string search)
+        public IActionResult Index(string search, string sortOrder,string deleteId)
         {
-            List<UserDetails> result= _userDetails.GetAll().ToList();
-            if(search != null)
+            List<UserDetails> result = _userDetails.GetAll().ToList();
+
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (sortOrder == "Date")
+            {
+                result = result.OrderByDescending(x => x.DateOfBirth).ToList();
+            }
+ 
+            if (search != null)
             {
                 result = result.Where(x => x.FirstName.Contains(search) || x.LastName.Contains(search) || x.Email.Contains(search)).ToList();
+            }
+            
+            if(deleteId!=null)
+            {
+                int key = Int32.Parse(deleteId);
+
+                result = _userDetails.GetAll().ToList();
+
+                var del_result=result.Where(x => x.Id.Equals(key));
+                {
+
+                }
+
+                //if (del_result.Any(key))
+                //
+                //    DeleteById(key);
+                //
             }
             return View(result);
         }
@@ -59,12 +86,12 @@ namespace JobApplicationSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                int newkey=_userDetails.Create(userDetails);
-          
+                int newkey = _userDetails.Create(userDetails);
 
-                TempData["NewKey"]=newkey;
 
-                return RedirectToAction("Create","AddressDetails");
+                TempData["NewKey"] = newkey;
+
+                return RedirectToAction("Create", "AddressDetails");
             }
             return View(userDetails);
         }
@@ -152,6 +179,6 @@ namespace JobApplicationSystem.Controllers
             return _userDetails.Any(id);
         }
 
-        
+
     }
 }

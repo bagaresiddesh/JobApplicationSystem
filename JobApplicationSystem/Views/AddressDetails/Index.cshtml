@@ -17,9 +17,13 @@
         <input type="submit" class="btn-primary " value="search"/>
     }
 </p>
+
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserDetailsId)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Country)
             </th>
@@ -44,6 +48,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserDetailsId)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Country)
             </td>

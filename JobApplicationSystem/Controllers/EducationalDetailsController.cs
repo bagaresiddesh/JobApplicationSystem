@@ -20,6 +20,7 @@ namespace JobApplicationSystem.Controllers
         public IActionResult Index(string search)
         {
             List<EducationalDetails> result = _educationalDetails.GetAll().ToList();
+
             if (search != null)
             {
                 result = result.Where(x => x.GraduationPassingYear.Contains(search)).ToList();
