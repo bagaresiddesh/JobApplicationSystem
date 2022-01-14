@@ -52,8 +52,10 @@ namespace JobApplicationSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                _userDetails.Create(userDetails);
-                _userDetails.SaveChanges();
+                int newkey=_userDetails.Create(userDetails);
+          
+
+                TempData["NewKey"]=newkey;
 
                 return RedirectToAction(nameof(Index));
             }

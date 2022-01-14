@@ -7,7 +7,7 @@ namespace JobApplicationSystem.Service.Interface
     {
         IEnumerable<UserDetails> GetAll();
         UserDetails GetById(int id);
-        void Create(UserDetails userDetails);
+        int Create(UserDetails userDetails);
         void Update(UserDetails userDetails);
         void Delete(int Id);
         void SaveChanges();

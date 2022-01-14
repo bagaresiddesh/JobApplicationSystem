@@ -56,7 +56,20 @@ namespace JobApplicationSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                _addressDetails.Create(addressDetails);
+                int newkey = (int)TempData["NewKey"];
+
+                AddressDetails temp = new AddressDetails
+                {
+                    UserDetailsId = newkey,
+                    Country = addressDetails.Country,
+                    State = addressDetails.State,
+                    City = addressDetails.City,
+                    PostalCode = addressDetails.PostalCode,
+                    AddressLine1 = addressDetails.AddressLine1,
+                    AddressLine2 = addressDetails.AddressLine2,
+                };
+
+                _addressDetails.Create(temp);
                 _addressDetails.SaveChanges();
 
                 return RedirectToAction(nameof(Index));

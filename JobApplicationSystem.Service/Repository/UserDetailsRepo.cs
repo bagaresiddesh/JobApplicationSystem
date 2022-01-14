@@ -18,9 +18,12 @@ namespace JobApplicationSystem.Service.Repository
             _applicationDbContext = applicationDbContext;
         }
 
-        public void Create(UserDetails userDetails)
+        public int Create(UserDetails userDetails)
         {
             _applicationDbContext.UserDetails.Add(userDetails);
+            _applicationDbContext.SaveChanges();
+             var a=userDetails.Id;
+            return a;
         }
 
         public void Delete(int id)

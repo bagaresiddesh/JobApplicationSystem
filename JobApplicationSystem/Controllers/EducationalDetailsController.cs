@@ -56,7 +56,21 @@ namespace JobApplicationSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                _educationalDetails.Create(educationalDetails);
+                int newkey = (int)TempData["NewKey"];
+
+                EducationalDetails temp = new EducationalDetails
+                {
+                    UserDetailsId = newkey,
+                    SSCPassingYear = educationalDetails.SSCPassingYear,
+                    HSCPassingYear = educationalDetails.HSCPassingYear,
+                    GraduationPassingYear = educationalDetails.GraduationPassingYear,
+                    PostGraduationPassingYear = educationalDetails.PostGraduationPassingYear,
+                    IsYearGap = educationalDetails.IsYearGap,
+                    IsActiveBacklogs = educationalDetails.IsActiveBacklogs,
+                    AcademicProjects = educationalDetails.AcademicProjects
+                };
+
+                _educationalDetails.Create(temp);
                 _educationalDetails.SaveChanges();
 
                 return RedirectToAction(nameof(Index));
