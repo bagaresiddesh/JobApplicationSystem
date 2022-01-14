@@ -70,7 +70,6 @@ namespace JobApplicationSystem.Controllers
                 };
 
                 _addressDetails.Create(temp);
-                _addressDetails.SaveChanges();
 
                 return RedirectToAction(nameof(Index));
             }
@@ -110,7 +109,6 @@ namespace JobApplicationSystem.Controllers
                 try
                 {
                     _addressDetails.Update(addressDetails);
-                    _addressDetails.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {

@@ -30,6 +30,7 @@ namespace JobApplicationSystem.Service.Repository
         {
             UserDetails temp = _applicationDbContext.UserDetails.Find(id);
             _applicationDbContext.UserDetails.Remove(temp);
+            _applicationDbContext.SaveChanges();
         }
 
         public IEnumerable<UserDetails> GetAll()
@@ -45,10 +46,6 @@ namespace JobApplicationSystem.Service.Repository
         public void Update(UserDetails userDetails)
         {
             _applicationDbContext.Entry(userDetails).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-        }
-
-        public void SaveChanges()
-        {
             _applicationDbContext.SaveChanges();
         }
 

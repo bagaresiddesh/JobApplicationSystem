@@ -71,7 +71,6 @@ namespace JobApplicationSystem.Controllers
                 };
 
                 _educationalDetails.Create(temp);
-                _educationalDetails.SaveChanges();
 
                 return RedirectToAction(nameof(Index));
             }
@@ -111,7 +110,6 @@ namespace JobApplicationSystem.Controllers
                 try
                 {
                     _educationalDetails.Update(educationalDetails);
-                    _educationalDetails.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -153,7 +151,6 @@ namespace JobApplicationSystem.Controllers
         {
             var educationalDetails = _educationalDetails.GetById(id);
             _educationalDetails.Delete(id);
-            _educationalDetails.SaveChanges();
 
             return RedirectToAction(nameof(Index));
         }

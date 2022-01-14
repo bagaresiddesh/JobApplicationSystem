@@ -95,7 +95,6 @@ namespace JobApplicationSystem.Controllers
                 try
                 {
                     _userDetails.Update(userDetails);
-                    _userDetails.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -137,7 +136,6 @@ namespace JobApplicationSystem.Controllers
         {
             var userDetails = _userDetails.GetById(id);
             _userDetails.Delete(id);
-            _userDetails.SaveChanges();
 
             return RedirectToAction(nameof(Index));
         }

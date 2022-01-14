@@ -12,7 +12,6 @@ namespace JobApplicationSystem.Service.Interface
         void Create(EducationalDetails educationalDetails);
         void Update(EducationalDetails educationalDetails);
         void Delete(int Id);
-        void SaveChanges();
         bool Any(int Id);
     }
 }

@@ -27,12 +27,14 @@ namespace JobApplicationSystem.Service.Repository
         public void Create(AddressDetails addressDetails)
         {
             _applicationDbContext.AddressDetails.Add(addressDetails);
+            _applicationDbContext.SaveChanges();
         }
 
         public void Delete(int id)
         {
             AddressDetails temp = _applicationDbContext.AddressDetails.Find(id);
             _applicationDbContext.Remove(temp);
+            _applicationDbContext.SaveChanges();
         }
 
         public IEnumerable<AddressDetails> GetAll()
@@ -45,14 +47,10 @@ namespace JobApplicationSystem.Service.Repository
             return _applicationDbContext.AddressDetails.FirstOrDefault(x => x.Id == id);
         }
 
-        public void SaveChanges()
-        {
-            _applicationDbContext.SaveChanges();
-        }
-
         public void Update(AddressDetails addressDetails)
         {
             _applicationDbContext.Entry(addressDetails).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _applicationDbContext.SaveChanges();
         }
     }
 }

@@ -26,12 +26,14 @@ namespace JobApplicationSystem.Service.Repository
         public void Create(EducationalDetails educationalDetails)
         {
             _applicationDbContext.EducationalDetails.Add(educationalDetails);
+            _applicationDbContext.SaveChanges();
         }
 
         public void Delete(int id)
         {
             EducationalDetails temp = _applicationDbContext.EducationalDetails.Find(id);
             _applicationDbContext.EducationalDetails.Remove(temp);
+            _applicationDbContext.SaveChanges();
         }
 
         public IEnumerable<EducationalDetails> GetAll()
@@ -44,14 +46,10 @@ namespace JobApplicationSystem.Service.Repository
             return _applicationDbContext.EducationalDetails.FirstOrDefault(x => x.Id == id);
         }
 
-        public void SaveChanges()
-        {
-            _applicationDbContext.SaveChanges();
-        }
-
         public void Update(EducationalDetails educationalDetails)
         {
             _applicationDbContext.Entry(educationalDetails).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _applicationDbContext.SaveChanges();
         }
     }
 }

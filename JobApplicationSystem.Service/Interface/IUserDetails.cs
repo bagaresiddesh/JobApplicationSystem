@@ -10,7 +10,6 @@ namespace JobApplicationSystem.Service.Interface
         int Create(UserDetails userDetails);
         void Update(UserDetails userDetails);
         void Delete(int Id);
-        void SaveChanges();
         bool Any(int Id);
     }
 }
