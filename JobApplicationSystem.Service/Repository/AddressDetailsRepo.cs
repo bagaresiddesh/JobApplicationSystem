@@ -1,7 +1,6 @@
 ﻿using JobApplicationSystem.DAL.Data;
 using JobApplicationSystem.DAL.Model;
 using JobApplicationSystem.Service.Interface;
-using Microsoft.EntityFrameworkCore.Internal;
 using System.Collections.Generic;
 using System.Linq;
 

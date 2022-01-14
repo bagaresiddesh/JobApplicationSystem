@@ -57,7 +57,7 @@ namespace JobApplicationSystem.Controllers
 
                 TempData["NewKey"]=newkey;
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create","AddressDetails");
             }
             return View(userDetails);
         }
@@ -144,5 +144,7 @@ namespace JobApplicationSystem.Controllers
         {
             return _userDetails.Any(id);
         }
+
+        
     }
 }

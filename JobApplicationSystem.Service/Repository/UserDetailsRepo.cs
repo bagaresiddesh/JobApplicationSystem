@@ -9,10 +9,6 @@ namespace JobApplicationSystem.Service.Repository
     public class UserDetailsRepo : IUserDetails
     {
         private readonly ApplicationDbContext _applicationDbContext;
-        public int Count()
-        {
-            return _applicationDbContext.UserDetails.Count();
-        }
         public UserDetailsRepo(ApplicationDbContext applicationDbContext)
         {
             _applicationDbContext = applicationDbContext;

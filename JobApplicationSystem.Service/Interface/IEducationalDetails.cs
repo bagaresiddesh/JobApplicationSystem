@@ -1,7 +1,5 @@
 ﻿using JobApplicationSystem.DAL.Model;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace JobApplicationSystem.Service.Interface
 {

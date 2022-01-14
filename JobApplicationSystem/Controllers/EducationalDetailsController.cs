@@ -1,9 +1,5 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using JobApplicationSystem.DAL.Data;
 using JobApplicationSystem.DAL.Model;
 using JobApplicationSystem.Service.Interface;
 
@@ -72,7 +68,7 @@ namespace JobApplicationSystem.Controllers
 
                 _educationalDetails.Create(temp);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             return View(educationalDetails);
         }
