@@ -11,5 +11,6 @@ namespace JobApplicationSystem.Service.Interface
         void Update(UserDetails userDetails);
         void Delete(int Id);
         bool Any(int Id);
+        void MyDelete(int id);
     }
 }

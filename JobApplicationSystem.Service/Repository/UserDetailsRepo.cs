@@ -28,6 +28,18 @@ namespace JobApplicationSystem.Service.Repository
             _applicationDbContext.UserDetails.Remove(temp);
             _applicationDbContext.SaveChanges();
         }
+         public void MyDelete(int id)
+        {
+            UserDetails temp = _applicationDbContext.UserDetails.Where(x=>x.Id==id).FirstOrDefault();
+            AddressDetails target = _applicationDbContext.AddressDetails.Where(x => x.UserDetailsId == id).FirstOrDefault();            
+            EducationalDetails target2 = _applicationDbContext.EducationalDetails.Where(x => x.UserDetailsId == id).FirstOrDefault();
+
+            _applicationDbContext.UserDetails.Remove(temp);
+            _applicationDbContext.AddressDetails.Remove(target);
+            _applicationDbContext.AddressDetails.Remove(target);
+
+            _applicationDbContext.SaveChanges();
+        }
 
         public IEnumerable<UserDetails> GetAll()
         {

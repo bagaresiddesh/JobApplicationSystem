@@ -4,7 +4,6 @@ using JobApplicationSystem.DAL.Model;
 using JobApplicationSystem.Service.Interface;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore.Internal;
 using System;
 
 namespace JobApplicationSystem.Controllers
@@ -19,7 +18,7 @@ namespace JobApplicationSystem.Controllers
         }
 
         // GET: UserDetails
-        public IActionResult Index(string search, string sortOrder,string deleteId)
+        public IActionResult Index(string search, string sortOrder, string delete)
         {
             List<UserDetails> result = _userDetails.GetAll().ToList();
 
@@ -29,29 +28,19 @@ namespace JobApplicationSystem.Controllers
             {
                 result = result.OrderByDescending(x => x.DateOfBirth).ToList();
             }
- 
+
             if (search != null)
             {
                 result = result.Where(x => x.FirstName.Contains(search) || x.LastName.Contains(search) || x.Email.Contains(search)).ToList();
             }
-            
-            if(deleteId!=null)
+
+            if (delete != null)
             {
-                int key = Int32.Parse(deleteId);
-
-                result = _userDetails.GetAll().ToList();
-
-                var del_result=result.Where(x => x.Id.Equals(key));
-                {
-
-                }
-
-                //if (del_result.Any(key))
-                //
-                //    DeleteById(key);
-                //
+                int deleteid = Convert.ToInt32(delete);
+                DeleteConfirmed(deleteid);
             }
-            return View(result);
+            List<UserDetails> newresult = _userDetails.GetAll().ToList();
+            return View(newresult);
         }
 
         // GET: UserDetails/Details/5
@@ -149,11 +138,6 @@ namespace JobApplicationSystem.Controllers
         // GET: UserDetails/Delete/5
         public IActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var userDetails = _userDetails.GetById(id);
             if (userDetails == null)
             {
@@ -169,7 +153,11 @@ namespace JobApplicationSystem.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             var userDetails = _userDetails.GetById(id);
-            _userDetails.Delete(id);
+            if(userDetails == null)
+            {
+                return NotFound();
+            }
+            _userDetails.MyDelete(id);
 
             return RedirectToAction(nameof(Index));
         }

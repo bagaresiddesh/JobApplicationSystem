@@ -12,17 +12,17 @@ namespace JobApplicationSystem.DAL.Model
         public int UserDetailsId { get; set; }
 
         [Required]
-        [MaxLength(5)]
+        [MaxLength(4)]
         [DisplayName("SSC Pasing Year")]
         public string SSCPassingYear { get; set; }
 
         [Required]
-        [MaxLength(5)]
+        [MaxLength(4)]
         [DisplayName("HSC Pasing Year")]
         public string HSCPassingYear { get; set; }
 
         [Required]
-        [MaxLength(5)]
+        [MaxLength(4)]
         [DisplayName("Graduation Pasing Year")]
         public string GraduationPassingYear { get; set; }
 
