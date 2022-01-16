@@ -77,7 +77,6 @@ namespace JobApplicationSystem.Controllers
             {
                 int newkey = _userDetails.Create(userDetails);
 
-
                 TempData["NewKey"] = newkey;
 
                 return RedirectToAction("Create", "AddressDetails");

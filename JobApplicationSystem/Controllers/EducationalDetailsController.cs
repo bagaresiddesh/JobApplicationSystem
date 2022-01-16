@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using JobApplicationSystem.DAL.Model;
-using JobApplicationSystem.Service.Interface;
-using System.Linq;
 using System.Collections.Generic;
+using JobApplicationSystem.Service.Interface;
 
 namespace JobApplicationSystem.Controllers
 {
@@ -17,15 +17,10 @@ namespace JobApplicationSystem.Controllers
         }
 
         // GET: EducationalDetails
-        public IActionResult Index(string search)
+        public IActionResult Index()
         {
-            List<EducationalDetails> result = _educationalDetails.GetAll().ToList();
-
-            if (search != null)
-            {
-                result = result.Where(x => x.GraduationPassingYear.Contains(search)).ToList();
-            }
-            return View(result);
+            List<EducationalDetails> educationalDetails = _educationalDetails.GetAll().ToList();
+            return View(educationalDetails);
         }
 
         // GET: EducationalDetails/Details/5
@@ -56,7 +51,7 @@ namespace JobApplicationSystem.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,UserDetailsId,SSCPassingYear,HSCPassingYear,GraduationPassingYear,PostGraduationPassingYear,IsYearGap,IsActiveBacklogs,AcademicProjects")] EducationalDetails educationalDetails)
+        public IActionResult Create([Bind("Id,UserDetailsId,IsYearGap,IsActiveBacklogs,AcademicProjects")] EducationalDetails educationalDetails)
         {
             if (ModelState.IsValid)
             {
@@ -65,19 +60,18 @@ namespace JobApplicationSystem.Controllers
                 EducationalDetails temp = new EducationalDetails
                 {
                     UserDetailsId = newkey,
-                    SSCPassingYear = educationalDetails.SSCPassingYear,
-                    HSCPassingYear = educationalDetails.HSCPassingYear,
-                    GraduationPassingYear = educationalDetails.GraduationPassingYear,
-                    PostGraduationPassingYear = educationalDetails.PostGraduationPassingYear,
-                    IsYearGap = educationalDetails.IsYearGap,
-                    IsActiveBacklogs = educationalDetails.IsActiveBacklogs,
-                    AcademicProjects = educationalDetails.AcademicProjects
+                    IsYearGap= educationalDetails.IsYearGap,
+                    IsActiveBacklogs=educationalDetails.IsActiveBacklogs,
+                    AcademicProjects=educationalDetails.AcademicProjects
                 };
 
-                _educationalDetails.Create(temp);
+                int Ekey=_educationalDetails.Create(temp);
 
-                return RedirectToAction("Index", "Home");
+                TempData["EKey"] = Ekey;
+
+                return RedirectToAction("Create", "Educations");
             }
+
             return View(educationalDetails);
         }
 
@@ -102,9 +96,9 @@ namespace JobApplicationSystem.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("Id,UserDetailsId,SSCPassingYear,HSCPassingYear,GraduationPassingYear,PostGraduationPassingYear,IsYearGap,IsActiveBacklogs,AcademicProjects")] EducationalDetails educationalDetails)
+        public IActionResult Edit(int id, [Bind("EId,UserDetailsId,IsYearGap,IsActiveBacklogs,AcademicProjects")] EducationalDetails educationalDetails)
         {
-            if (id != educationalDetails.Id)
+            if (id != educationalDetails.EId)
             {
                 return NotFound();
             }
@@ -117,7 +111,7 @@ namespace JobApplicationSystem.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EducationalDetailsExists(educationalDetails.Id))
+                    if (!EducationalDetailsExists(educationalDetails.EId))
                     {
                         return NotFound();
                     }

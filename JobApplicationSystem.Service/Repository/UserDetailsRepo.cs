@@ -18,7 +18,7 @@ namespace JobApplicationSystem.Service.Repository
         {
             _applicationDbContext.UserDetails.Add(userDetails);
             _applicationDbContext.SaveChanges();
-             var a=userDetails.Id;
+            var a=userDetails.Id;
             return a;
         }
 

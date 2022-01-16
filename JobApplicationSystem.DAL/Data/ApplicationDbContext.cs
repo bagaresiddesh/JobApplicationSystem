@@ -12,5 +12,6 @@ namespace JobApplicationSystem.DAL.Data
         public DbSet<UserDetails> UserDetails { get; set; }
         public DbSet<AddressDetails> AddressDetails { get; set; }
         public DbSet<EducationalDetails> EducationalDetails { get; set; }
+        public DbSet<Education> Education { get; set; }
     }
 }

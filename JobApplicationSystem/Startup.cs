@@ -26,9 +26,11 @@ namespace JobApplicationSystem
             services.AddControllersWithViews();
             services.AddDbContext<ApplicationDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("Connection")));
             services.AddRazorPages();
+            
             services.AddScoped<IUserDetails, UserDetailsRepo>();
             services.AddScoped<IAddressDetails, AddressDetailsRepo>();
             services.AddScoped<IEducationalDetails, EducationalDetailsRepo>();
+            services.AddScoped<IEducation, EducationRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,32 +5,13 @@
 }
 
 <h4>Create New Educational Details</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        
-            <div class="form-group">
-                <label asp-for="SSCPassingYear" class="control-label"></label>
-                <input asp-for="SSCPassingYear" class="form-control" />
-                <span asp-validation-for="SSCPassingYear" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HSCPassingYear" class="control-label"></label>
-                <input asp-for="HSCPassingYear" class="form-control" />
-                <span asp-validation-for="HSCPassingYear" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GraduationPassingYear" class="control-label"></label>
-                <input asp-for="GraduationPassingYear" class="form-control" />
-                <span asp-validation-for="GraduationPassingYear" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PostGraduationPassingYear" class="control-label"></label>
-                <input asp-for="PostGraduationPassingYear" class="form-control" />
-                <span asp-validation-for="PostGraduationPassingYear" class="text-danger"></span>
-            </div>
+          
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="IsYearGap" /> @Html.DisplayNameFor(model => model.IsYearGap)
@@ -51,10 +32,6 @@
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

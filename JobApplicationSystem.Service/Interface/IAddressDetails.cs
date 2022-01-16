@@ -6,7 +6,7 @@ namespace JobApplicationSystem.Service.Interface
     public interface IAddressDetails
     {
         IEnumerable<AddressDetails> GetAll();
-        AddressDetails GetById(int id);
+        AddressDetails GetById(int Id);
         void Create(AddressDetails addressDetails);
         void Update(AddressDetails addressDetails);
         void Delete(int Id);

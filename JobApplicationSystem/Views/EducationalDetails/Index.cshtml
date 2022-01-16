@@ -7,15 +7,7 @@
 <h4>List of Educational Details</h4>
 
 <p>
-    <a class="btn btn-primary btn-sm" asp-action="Index" asp-controller="Home">Back</a>
-</p>
-<p>
-    @using(@Html.BeginForm())
-    {
-        <label>Search for Graduation Passing Year</label>
-        <input id="Search" name="Search" type="text"/>
-        <input type="submit" class="btn-primary " value="search"/>
-    }
+    <a class="btn btn-primary btn-sm" asp-action="Privacy" asp-controller="Home">Back</a>
 </p>
 <table class="table">
     <thead>
@@ -24,16 +16,7 @@
                 @Html.DisplayNameFor(model => model.UserDetailsId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SSCPassingYear)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HSCPassingYear)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GraduationPassingYear)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PostGraduationPassingYear)
+                @Html.DisplayNameFor(model => model.EId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IsYearGap)
@@ -54,16 +37,7 @@
                 @Html.DisplayFor(modelItem => item.UserDetailsId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SSCPassingYear)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HSCPassingYear)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GraduationPassingYear)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PostGraduationPassingYear)
+                @Html.DisplayFor(modelItem => item.EId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsYearGap)
@@ -75,12 +49,9 @@
                 @Html.DisplayFor(modelItem => item.AcademicProjects)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UserDetails.Email)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.EId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.EId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.EId">Delete</a>
             </td>
         </tr>
 }

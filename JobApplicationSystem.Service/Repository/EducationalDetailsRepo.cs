@@ -16,17 +16,20 @@ namespace JobApplicationSystem.Service.Repository
 
         public bool Any(int id)
         {
-            if(_applicationDbContext.EducationalDetails.Any(x=>x.Id==id))
+            if(_applicationDbContext.EducationalDetails.Any(x=>x.EId==id))
             {
                 return true;
             }
             return false;   
         }
 
-        public void Create(EducationalDetails educationalDetails)
+        public int Create(EducationalDetails educationalDetails)
         {
             _applicationDbContext.EducationalDetails.Add(educationalDetails);
             _applicationDbContext.SaveChanges();
+            
+            var a = educationalDetails.EId;
+            return a;
         }
 
         public void Delete(int id)
@@ -43,7 +46,7 @@ namespace JobApplicationSystem.Service.Repository
 
         public EducationalDetails GetById(int id)
         {
-            return _applicationDbContext.EducationalDetails.FirstOrDefault(x => x.Id == id);
+            return _applicationDbContext.EducationalDetails.FirstOrDefault(x => x.EId == id);
         }
 
         public void Update(EducationalDetails educationalDetails)

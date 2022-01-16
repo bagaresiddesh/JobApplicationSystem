@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -7,29 +8,9 @@ namespace JobApplicationSystem.DAL.Model
     public class EducationalDetails
     {
         [Key]
-        public int Id { get; set; }
+        public int EId { get; set; }
 
         public int UserDetailsId { get; set; }
-
-        [Required]
-        [MaxLength(4)]
-        [DisplayName("SSC Pasing Year")]
-        public string SSCPassingYear { get; set; }
-
-        [Required]
-        [MaxLength(4)]
-        [DisplayName("HSC Pasing Year")]
-        public string HSCPassingYear { get; set; }
-
-        [Required]
-        [MaxLength(4)]
-        [DisplayName("Graduation Pasing Year")]
-        public string GraduationPassingYear { get; set; }
-
-        [Required]
-        [MaxLength(5)]
-        [DisplayName("Post Graduation Pasing Year")]
-        public string PostGraduationPassingYear { get; set; }
 
         [Required]
         [DisplayName("Is Year Gap ?")]
@@ -46,5 +27,6 @@ namespace JobApplicationSystem.DAL.Model
         [ForeignKey("UserDetailsId")]
         public virtual UserDetails UserDetails { get; set; }
 
+        public virtual ICollection<Education> Education { get; set; }
     }
 }

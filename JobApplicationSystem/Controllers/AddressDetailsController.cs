@@ -87,12 +87,12 @@ namespace JobApplicationSystem.Controllers
                 return NotFound();
             }
 
-            var addressDetail = _addressDetails.GetById(id);
-            if (addressDetail == null)
+            var addressDetails = _addressDetails.GetById(id);
+            if (addressDetails == null)
             {
                 return NotFound();
             }
-            return View(addressDetail);
+            return View(addressDetails);
         }
 
         // POST: AddressDetails/Edit/5
