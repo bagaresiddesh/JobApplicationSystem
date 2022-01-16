@@ -69,6 +69,11 @@ namespace JobApplicationSystem.Controllers
 
                 TempData["EKey"] = Ekey;
 
+                //counter to accept 3 qualification forms
+                int count = 4; 
+                TempData["Count"] = count;
+                ViewBag.Count = count;
+
                 return RedirectToAction("Create", "Educations");
             }
 

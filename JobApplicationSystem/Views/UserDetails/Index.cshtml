@@ -8,7 +8,9 @@
 
 <p>
     <a class="btn btn-primary btn-sm" asp-action="Privacy" asp-controller="Home">Back</a>
+    <a class="btn btn-primary btn-sm" asp-action="Index" asp-controller="UserDetails">Refresh</a>
 </p>
+
 <p>
     @using(@Html.BeginForm())
     {
@@ -25,6 +27,16 @@
         <input type="submit"  class="btn-primary " value="delete" />
     }
 </p>
+<p>
+    @using(@Html.BeginForm())
+    {
+        <label>Get Male/Female</label>
+        <input type="radio" id="Male" name="Male" value="Male">
+        <input type="radio" id="Female" name="Female" value="Female">
+        <input type="submit"  class="btn-primary " value="gender" />
+    }
+</p>
+
 <table class="table">
     <thead>
         <tr>

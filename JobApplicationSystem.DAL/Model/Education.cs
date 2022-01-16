@@ -11,16 +11,13 @@ namespace JobApplicationSystem.DAL.Model
 
         public int EId { get; set; }
 
-        [Required]
         [MaxLength(10)]
         public string Qualification { get; set; }
 
-        [Required]
-        [StringLength(8)]
+        [StringLength(4)]
         [Display(Name ="Passing Year")]
         public string PassingYear { get; set; }
 
-        [Required]
         [Range(35,100,ErrorMessage ="Invalid")]
         public float Percentage { get; set; }
 

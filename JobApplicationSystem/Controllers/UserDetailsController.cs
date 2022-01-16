@@ -18,7 +18,7 @@ namespace JobApplicationSystem.Controllers
         }
 
         // GET: UserDetails
-        public IActionResult Index(string search, string sortOrder, string delete)
+        public IActionResult Index(string search, string sortOrder, string delete,string gender)
         {
             List<UserDetails> result = _userDetails.GetAll().ToList();
 
@@ -39,8 +39,9 @@ namespace JobApplicationSystem.Controllers
                 int deleteid = Convert.ToInt32(delete);
                 DeleteConfirmed(deleteid);
             }
-            List<UserDetails> newresult = _userDetails.GetAll().ToList();
-            return View(newresult);
+            return View(result);    
+            //List<UserDetails> newresult = _userDetails.GetAll().ToList();
+            //return View(newresult);
         }
 
         // GET: UserDetails/Details/5

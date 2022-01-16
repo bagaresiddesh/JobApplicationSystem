@@ -51,22 +51,36 @@ namespace JobApplicationSystem.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,EId,Qualification,PssingYear,Percentage")] Education education)
+        public IActionResult Create([Bind("Id,EId,Qualification,PassingYear,Percentage")] Education education)
         {
             if (ModelState.IsValid)
             {
                 int newkey = (int)TempData["EKey"];
 
-                Education temp = new Education
-                {
-                    EId = newkey,
-                    Qualification = education.Qualification,
-                    PassingYear = education.PassingYear,
-                    Percentage = education.Percentage
-                };
+                int count = (int)TempData["Count"];
 
-                _education.Create(temp);
-                return RedirectToAction("Index");
+                if(count > 0)
+                {
+                    Education temp = new Education
+                    {
+                        EId = newkey,
+                        Qualification = education.Qualification,
+                        PassingYear = education.PassingYear,
+                        Percentage = education.Percentage
+                    };
+
+                    _education.Create(temp);
+
+                    count = count - 1;
+
+                    TempData["Count"]=count;
+                    ViewBag.Count = count;
+                    if(count== 0)
+                    {
+                        return RedirectToAction("Privacy", "Home");
+                    }                  
+                    return RedirectToAction("Create","Educations");
+                }             
             }
             return View(education);
         }
