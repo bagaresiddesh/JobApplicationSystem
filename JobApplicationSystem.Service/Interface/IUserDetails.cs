@@ -6,6 +6,7 @@ namespace JobApplicationSystem.Service.Interface
     public interface IUserDetails
     {
         IEnumerable<UserDetails> GetAll();
+        IEnumerable<UserDetails> GetComplete();
         UserDetails GetById(int id);
         int Create(UserDetails userDetails);
         void Update(UserDetails userDetails);

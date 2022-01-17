@@ -67,6 +67,19 @@ namespace JobApplicationSystem.Service.Repository
             return _applicationDbContext.UserDetails.ToList();
         }
 
+        public IEnumerable<UserDetails> GetComplete()
+        {
+            var result = _applicationDbContext.UserDetails.ToList();
+            int id=0,eid=0;
+
+            foreach (var item in result)
+            {
+              
+            }
+
+            return result;
+        }
+
         //public List<Check> InnerJoinUser()
         //{
         //    List<Check> innerJoin = new List<Check>();

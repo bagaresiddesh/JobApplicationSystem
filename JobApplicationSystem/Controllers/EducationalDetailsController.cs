@@ -60,17 +60,17 @@ namespace JobApplicationSystem.Controllers
                 EducationalDetails temp = new EducationalDetails
                 {
                     UserDetailsId = newkey,
-                    IsYearGap= educationalDetails.IsYearGap,
-                    IsActiveBacklogs=educationalDetails.IsActiveBacklogs,
-                    AcademicProjects=educationalDetails.AcademicProjects
+                    IsYearGap = educationalDetails.IsYearGap,
+                    IsActiveBacklogs = educationalDetails.IsActiveBacklogs,
+                    AcademicProjects = educationalDetails.AcademicProjects
                 };
 
-                int Ekey=_educationalDetails.Create(temp);
+                int Ekey = _educationalDetails.Create(temp);
 
                 TempData["EKey"] = Ekey;
 
                 //counter to accept 3 qualification forms
-                int count = 4; 
+                int count = 4;
                 TempData["Count"] = count;
                 ViewBag.Count = count;
 

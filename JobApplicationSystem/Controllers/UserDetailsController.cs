@@ -18,7 +18,7 @@ namespace JobApplicationSystem.Controllers
         }
 
         // GET: UserDetails
-        public IActionResult Index(string search, string sortOrder, string delete,string gender,string incomplete)
+        public IActionResult Index(string search, string sortOrder, string delete,string gender)
         {
             ViewData["Total"] = _userDetails.Count();
 
@@ -31,15 +31,19 @@ namespace JobApplicationSystem.Controllers
                 result = result.OrderByDescending(x => x.DateOfBirth).ToList();
             }
 
-            ViewData["Gender"] = gender == "male" ? "female" : "male";
+            //ViewData["Gender"] = gender == "male" ? "female" : "male";
 
-            if (gender =="male")
+            if (gender =="Male")
             {
-                result = result.Where(x => x.Gender.Equals(1)).ToList();
+                result = result.Where(x => x.Gender.Equals(Gender.male)).ToList();
             }
-            else  if(gender =="female")
+            else  if(gender =="Female")
             {
-                result = result.Where(x => x.Gender.Equals(2)).ToList();
+                result = result.Where(x => x.Gender.Equals(Gender.female)).ToList();
+            }
+            else if (gender == "Other")
+            {
+                result = result.Where(x => x.Gender.Equals(Gender.other)).ToList();
             }
 
             if (search != null)
@@ -52,14 +56,6 @@ namespace JobApplicationSystem.Controllers
                 int deleteid = Convert.ToInt32(delete);
                 DeleteConfirmed(deleteid);
             }
-
-            if(incomplete!=null)
-            {
-
-            }
-
-         
-
             return View(result);   
         }
 

@@ -59,7 +59,7 @@ namespace JobApplicationSystem.Controllers
 
                 int count = (int)TempData["Count"];
 
-                if(count > 0)
+                if (count > 0)
                 {
                     Education temp = new Education
                     {
@@ -73,14 +73,14 @@ namespace JobApplicationSystem.Controllers
 
                     count = count - 1;
 
-                    TempData["Count"]=count;
+                    TempData["Count"] = count;
                     ViewBag.Count = count;
-                    if(count== 0)
+                    if (count == 0)
                     {
                         return RedirectToAction("Privacy", "Home");
-                    }                  
-                    return RedirectToAction("Create","Educations");
-                }             
+                    }
+                    return RedirectToAction("Create", "Educations");
+                }
             }
             return View(education);
         }

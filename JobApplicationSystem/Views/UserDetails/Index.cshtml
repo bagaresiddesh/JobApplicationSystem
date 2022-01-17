@@ -17,14 +17,25 @@
     {
         <label>Search for Name or Email</label>
         <input id="Search" name="Search" type="text"/>
-        <input type="submit" class="btn-primary " value="search"/>
+        <input type="submit" class="btn-primary " value="Search"/>
     }    
     @using(@Html.BeginForm())
     {
         <label>Delete by Id</label>
         <input id="Delete" name="Delete" type="text"/>
-        <input type="submit"  class="btn-primary " value="delete" />
+        <input type="submit"  class="btn-primary" value="Delete" />
     }
+    @using(@Html.BeginForm())
+    {
+        <label for="Gender">Gender :</label>
+        <select id="gender" name="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+        <input type=submit class="btn-primary">
+    }
+
 </p>
 
 <table class="table">
@@ -43,9 +54,7 @@
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
             <th>
-                <a asp-action="Index" asp-route-gender="@ViewData["Gender"]">
                 @Html.DisplayNameFor(model => model.Gender)
-                </a>
             </th>
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">
