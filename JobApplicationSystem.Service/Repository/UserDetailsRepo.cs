@@ -14,6 +14,11 @@ namespace JobApplicationSystem.Service.Repository
             _applicationDbContext = applicationDbContext;
         }
 
+        public int Count()
+        {
+            return _applicationDbContext.UserDetails.ToList().Count;
+        }
+
         public int Create(UserDetails userDetails)
         {
             _applicationDbContext.UserDetails.Add(userDetails);
@@ -34,6 +39,22 @@ namespace JobApplicationSystem.Service.Repository
             AddressDetails target = _applicationDbContext.AddressDetails.Where(x => x.UserDetailsId == id).FirstOrDefault();            
             EducationalDetails target2 = _applicationDbContext.EducationalDetails.Where(x => x.UserDetailsId == id).FirstOrDefault();
 
+            int flag=0;
+            while (flag != 1)
+            {
+                int Eid = target2.EId;
+                Education target3 = _applicationDbContext.Education.Where(x => x.EId == Eid).FirstOrDefault();
+
+                if (target3==null)
+                {
+                    flag=1;
+                    break;
+                }
+
+                _applicationDbContext.Education.Remove(target3);
+                _applicationDbContext.SaveChanges();
+            }
+            
             _applicationDbContext.UserDetails.Remove(temp);
             _applicationDbContext.AddressDetails.Remove(target);
             _applicationDbContext.AddressDetails.Remove(target);
@@ -45,6 +66,29 @@ namespace JobApplicationSystem.Service.Repository
         {
             return _applicationDbContext.UserDetails.ToList();
         }
+
+        //public List<Check> InnerJoinUser()
+        //{
+        //    List<Check> innerJoin = new List<Check>();
+            
+        //    var r= from ud in _applicationDbContext.UserDetails // outer sequence
+        //                    join ad in _applicationDbContext.AddressDetails
+        //                     on ud.Id equals ad.UserDetailsId
+        //                    join ed in _applicationDbContext.EducationalDetails
+        //                     on ud.Id equals ed.UserDetailsId
+                           
+        //                    select new Check
+        //                    { // result selector 
+        //                       Id = ud.Id,
+        //                       AddressId= ad.Id,
+        //                       EductionDetailId=ed.UserDetailsId,
+        //                       UserId=ed.UserDetailsId,
+        //                       Name=ud.FirstName
+
+        //                    };
+        //    innerJoin.AddRange(innerJoin);
+        //    return innerJoin;
+        //}
 
         public UserDetails GetById(int id)
         {

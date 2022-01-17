@@ -5,9 +5,10 @@
 }
 
 <h4>List of User Details</h4>
+<label> Total Applications : </label>@ViewData["Total"]
 
 <p>
-    <a class="btn btn-primary btn-sm" asp-action="Privacy" asp-controller="Home">Back</a>
+    <a class="btn btn-primary btn-sm" asp-action="Admin" asp-controller="Home">Back</a>
     <a class="btn btn-primary btn-sm" asp-action="Index" asp-controller="UserDetails">Refresh</a>
 </p>
 
@@ -17,23 +18,12 @@
         <label>Search for Name or Email</label>
         <input id="Search" name="Search" type="text"/>
         <input type="submit" class="btn-primary " value="search"/>
-    }     
-</p>
-<p>
+    }    
     @using(@Html.BeginForm())
     {
         <label>Delete by Id</label>
         <input id="Delete" name="Delete" type="text"/>
         <input type="submit"  class="btn-primary " value="delete" />
-    }
-</p>
-<p>
-    @using(@Html.BeginForm())
-    {
-        <label>Get Male/Female</label>
-        <input type="radio" id="Male" name="Male" value="Male">
-        <input type="radio" id="Female" name="Female" value="Female">
-        <input type="submit"  class="btn-primary " value="gender" />
     }
 </p>
 
@@ -53,7 +43,9 @@
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
             <th>
+                <a asp-action="Index" asp-route-gender="@ViewData["Gender"]">
                 @Html.DisplayNameFor(model => model.Gender)
+                </a>
             </th>
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">

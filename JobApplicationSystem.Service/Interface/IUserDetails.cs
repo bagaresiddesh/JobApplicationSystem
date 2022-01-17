@@ -12,5 +12,6 @@ namespace JobApplicationSystem.Service.Interface
         void Delete(int Id);
         bool Any(int Id);
         void MyDelete(int id);
+        int Count();
     }
 }

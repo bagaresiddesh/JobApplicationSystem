@@ -18,8 +18,10 @@ namespace JobApplicationSystem.Controllers
         }
 
         // GET: UserDetails
-        public IActionResult Index(string search, string sortOrder, string delete,string gender)
+        public IActionResult Index(string search, string sortOrder, string delete,string gender,string incomplete)
         {
+            ViewData["Total"] = _userDetails.Count();
+
             List<UserDetails> result = _userDetails.GetAll().ToList();
 
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
@@ -27,6 +29,17 @@ namespace JobApplicationSystem.Controllers
             if (sortOrder == "Date")
             {
                 result = result.OrderByDescending(x => x.DateOfBirth).ToList();
+            }
+
+            ViewData["Gender"] = gender == "male" ? "female" : "male";
+
+            if (gender =="male")
+            {
+                result = result.Where(x => x.Gender.Equals(1)).ToList();
+            }
+            else  if(gender =="female")
+            {
+                result = result.Where(x => x.Gender.Equals(2)).ToList();
             }
 
             if (search != null)
@@ -39,9 +52,15 @@ namespace JobApplicationSystem.Controllers
                 int deleteid = Convert.ToInt32(delete);
                 DeleteConfirmed(deleteid);
             }
-            return View(result);    
-            //List<UserDetails> newresult = _userDetails.GetAll().ToList();
-            //return View(newresult);
+
+            if(incomplete!=null)
+            {
+
+            }
+
+         
+
+            return View(result);   
         }
 
         // GET: UserDetails/Details/5
