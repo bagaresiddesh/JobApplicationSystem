@@ -34,7 +34,6 @@ namespace JobApplicationSystem.Service.Repository
             EducationalDetails target=_applicationDbContext.EducationalDetails.Find(key);
 
             int id = target.UserDetailsId;        
-
         }
 
         public void Delete(int Id)
@@ -52,6 +51,11 @@ namespace JobApplicationSystem.Service.Repository
         public Education GetById(int Id)
         {
             return _applicationDbContext.Education.FirstOrDefault(x => x.Id == Id);
+        }
+
+        public Education GetByEId(int Id)
+        {
+            return _applicationDbContext.Education.FirstOrDefault(x => x.EId == Id);
         }
 
         public void Update(Education education)

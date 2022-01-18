@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobApplicationSystem.Controllers
@@ -10,9 +11,6 @@ namespace JobApplicationSystem.Controllers
         {
             return View();
         }
-        public new IActionResult User()
-        {
-            return View();
-        }
+
     }
 }

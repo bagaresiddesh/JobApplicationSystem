@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace JobApplicationSystem.Controllers
 {
-    [Authorize]
     public class AddressDetailsController : Controller
     {
         private readonly IAddressDetails _addressDetails;
@@ -30,20 +29,19 @@ namespace JobApplicationSystem.Controllers
         }
 
         // GET: AddressDetails/Details/5
-        public IActionResult Details(int id)
+        public IActionResult Details(int id,int eid)
         {
-            if (id == null)
+            if (id != 0 && eid == 0)
             {
-                return NotFound();
+                var addressDetails = _addressDetails.GetById(id);
+                return View(addressDetails);
             }
-
-            var addressDetails = _addressDetails.GetById(id);
-            if(addressDetails == null)
+            else if(id == 0 && eid!=0)
             {
-                return NotFound();
+                var addressDetails= _addressDetails.GetByUserDetailsId(eid);
+                return View(addressDetails);
             }
-
-            return View(addressDetails);
+            return View();
         }
 
         // GET: AddressDetails/Create

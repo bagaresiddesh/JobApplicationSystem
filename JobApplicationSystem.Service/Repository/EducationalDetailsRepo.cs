@@ -49,6 +49,11 @@ namespace JobApplicationSystem.Service.Repository
             return _applicationDbContext.EducationalDetails.FirstOrDefault(x => x.EId == id);
         }
 
+        public EducationalDetails GetByUserDetailsId(int id)
+        {
+            return _applicationDbContext.EducationalDetails.FirstOrDefault(x => x.UserDetailsId == id);
+        }
+
         public void Update(EducationalDetails educationalDetails)
         {
             _applicationDbContext.Entry(educationalDetails).State = Microsoft.EntityFrameworkCore.EntityState.Modified;

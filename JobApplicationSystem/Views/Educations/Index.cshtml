@@ -4,10 +4,16 @@
     ViewData["Title"] = "Index";
 }
 
+<style>
+    th { background-color: #260d33; color: white;}
+    tr:nth-child(odd) {background-color: #f1d6ff;}
+    td { border-bottom: 1px solid #372640;}
+</style>
+
 <h4>List of Qualification Details</h4>
 
 <p>
-    <a class="btn btn-primary btn-sm" asp-action="Admin" asp-controller="Home">Back</a>
+    <a class="btn btn-primary btn-sm" asp-action="Admins" asp-controller="Admin">Back</a>
 </p>
 <table class="table">
     <thead>

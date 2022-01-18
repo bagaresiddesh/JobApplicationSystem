@@ -46,6 +46,11 @@ namespace JobApplicationSystem.Service.Repository
             return _applicationDbContext.AddressDetails.FirstOrDefault(x => x.Id == id);
         }
 
+        public AddressDetails GetByUserDetailsId(int uid)
+        {
+            return _applicationDbContext.AddressDetails.FirstOrDefault(x => x.UserDetailsId == uid);
+        }
+
         public void Update(AddressDetails addressDetails)
         {
             _applicationDbContext.Entry(addressDetails).State = Microsoft.EntityFrameworkCore.EntityState.Modified;

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace JobApplicationSystem.Controllers
 {
-    [Authorize]
     public class UserDetailsController : Controller
     {
         private readonly IUserDetails _userDetails;
@@ -182,6 +181,14 @@ namespace JobApplicationSystem.Controllers
         private bool UserDetailsExists(int id)
         {
             return _userDetails.Any(id);
+        }
+
+        public int GetIdByMail(string mail)
+        {
+            var userDetails= _userDetails.GetAll().ToList();
+            UserDetails target = userDetails.FirstOrDefault(x => x.Email == mail);
+
+            return target.Id;
         }
 
 

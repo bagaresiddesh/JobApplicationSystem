@@ -7,6 +7,7 @@ namespace JobApplicationSystem.Service.Interface
     {
         IEnumerable<Education> GetAll();
         Education GetById(int Id);
+        Education GetByEId(int Id);
         void Create(Education education);
         void Update(Education education);
         void Delete(int Id);

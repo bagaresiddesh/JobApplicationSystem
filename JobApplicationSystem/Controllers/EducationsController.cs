@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace JobApplicationSystem.Controllers
 {
-    [Authorize]
     public class EducationsController : Controller
     {
         private readonly IEducation _education;
@@ -26,20 +25,21 @@ namespace JobApplicationSystem.Controllers
         }
 
         // GET: Educations/Details/5
-        public IActionResult Details(int id)
+        public IActionResult Details(int id,int eid)
         {
-            if (id == null)
+            if (id != 0 && eid == 0)
             {
-                return NotFound();
+                var education = _education.GetByEId(id);
+                return View(education);
             }
-
-            var education = _education.GetById(id);
-            if (education == null)
+            else if (id == 0 && eid != 0)
             {
-                return NotFound();
-            }
+                var education = _education.GetAll().Where(x=>x.EId==eid);
+                
 
-            return View(education);
+                return View(education);
+            }
+            return View();
         }
 
         // GET: Educations/Create
@@ -77,9 +77,11 @@ namespace JobApplicationSystem.Controllers
 
                     TempData["Count"] = count;
                     ViewBag.Count = count;
+
+                    int Id=(int)TempData["UserDetailsId"];
                     if (count == 0)
                     {
-                        return RedirectToAction("User", "Other");
+                        return RedirectToAction("Details", "UserDetails", new {id=Id});
                     }
                     return RedirectToAction("Create", "Educations");
                 }

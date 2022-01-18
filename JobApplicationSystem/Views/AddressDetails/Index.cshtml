@@ -4,10 +4,16 @@
     ViewData["Title"] = "Index";
 }
 
+<style>
+    th { background-color: #260d33; color: white;}
+    tr:nth-child(odd) {background-color: #f1d6ff;}
+    td { border-bottom: 1px solid #372640;}
+</style>
+
 <h4>List of Address Details</h4>
 
 <p>
-    <a class="btn btn-primary btn-sm" asp-action="Admin" asp-controller="Home">Back</a>
+    <a class="btn btn-primary btn-sm" asp-action="Admins" asp-controller="Admin">Back</a>
     <a class="btn btn-primary btn-sm" asp-action="Index" asp-controller="AddressDetails">Refresh</a>
 </p>
 <p>
@@ -43,7 +49,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.AddressLine2)
             </th>
-            <th></th>
+            <th> </th>
         </tr>
     </thead>
     <tbody>
@@ -69,9 +75,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AddressLine2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserDetails.Email)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
