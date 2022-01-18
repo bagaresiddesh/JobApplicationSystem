@@ -4,9 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using JobApplicationSystem.DAL.Model;
 using System.Collections.Generic;
 using JobApplicationSystem.Service.Interface;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JobApplicationSystem.Controllers
 {
+    [Authorize]
     public class EducationsController : Controller
     {
         private readonly IEducation _education;
@@ -77,7 +79,7 @@ namespace JobApplicationSystem.Controllers
                     ViewBag.Count = count;
                     if (count == 0)
                     {
-                        return RedirectToAction("Privacy", "Home");
+                        return RedirectToAction("User", "Other");
                     }
                     return RedirectToAction("Create", "Educations");
                 }

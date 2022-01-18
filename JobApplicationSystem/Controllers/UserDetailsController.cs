@@ -4,10 +4,11 @@ using JobApplicationSystem.DAL.Model;
 using JobApplicationSystem.Service.Interface;
 using System.Collections.Generic;
 using System.Linq;
-using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JobApplicationSystem.Controllers
 {
+    [Authorize]
     public class UserDetailsController : Controller
     {
         private readonly IUserDetails _userDetails;
@@ -53,8 +54,9 @@ namespace JobApplicationSystem.Controllers
 
             if (delete != null)
             {
-                int deleteid = Convert.ToInt32(delete);
-                DeleteConfirmed(deleteid);
+                return RedirectToAction("Delete", new { id = delete });
+              //  int deleteid = Convert.ToInt32(delete);
+              //  DeleteConfirmed(deleteid);
             }
             return View(result);   
         }

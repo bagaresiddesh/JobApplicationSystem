@@ -4,9 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using JobApplicationSystem.DAL.Model;
 using System.Collections.Generic;
 using JobApplicationSystem.Service.Interface;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JobApplicationSystem.Controllers
 {
+    [Authorize]
     public class EducationalDetailsController : Controller
     {
         private readonly IEducationalDetails _educationalDetails;

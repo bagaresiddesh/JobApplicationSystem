@@ -28,6 +28,13 @@ namespace JobApplicationSystem.Service.Repository
         {
             _applicationDbContext.Education.Add(education);
             _applicationDbContext.SaveChanges();
+
+            int key=education.EId;
+
+            EducationalDetails target=_applicationDbContext.EducationalDetails.Find(key);
+
+            int id = target.UserDetailsId;        
+
         }
 
         public void Delete(int Id)
