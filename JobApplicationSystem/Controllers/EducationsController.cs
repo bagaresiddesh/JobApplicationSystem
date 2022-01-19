@@ -5,6 +5,8 @@ using JobApplicationSystem.DAL.Model;
 using System.Collections.Generic;
 using JobApplicationSystem.Service.Interface;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using JobApplicationSystem.Areas.Identity.Data;
 
 namespace JobApplicationSystem.Controllers
 {
@@ -14,9 +16,8 @@ namespace JobApplicationSystem.Controllers
 
         public EducationsController(IEducation education)
         {
-            _education= education;
+            _education = education;
         }
-
         // GET: Educations
         public IActionResult Index()
         {
@@ -25,19 +26,24 @@ namespace JobApplicationSystem.Controllers
         }
 
         // GET: Educations/Details/5
-        public IActionResult Details(int id,int eid)
+        public IActionResult MyDetails(int id,int eid)
+        
         {
             if (id != 0 && eid == 0)
             {
-                var education = _education.GetByEId(id);
-                return View(education);
+                var education = _education.GetAll().Where(x => x.EId == id).ToList();
+                if(education==null)
+                {
+                    ModelState.AddModelError("", "No Details");
+                    return View();
+                }
+                return View(education);                
             }
             else if (id == 0 && eid != 0)
             {
-                var education = _education.GetAll().Where(x=>x.EId==eid);
+                var education = _education.GetAll().Where(x => x.EId == eid).ToList();
                 
-
-                return View(education);
+               return View(education);
             }
             return View();
         }
@@ -110,7 +116,7 @@ namespace JobApplicationSystem.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("Id,EId,Qualification,PssingYear,Percentage")] Education education)
+        public IActionResult Edit(int id, [Bind("Id,EId,Qualification,PassingYear,Percentage")] Education education)
         {
             if (id != education.Id)
             {

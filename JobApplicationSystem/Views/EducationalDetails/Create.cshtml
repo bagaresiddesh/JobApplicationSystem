@@ -14,7 +14,7 @@
           
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsYearGap" /> @Html.DisplayNameFor(model => model.IsYearGap)
+                    <input text class="form-check-input" asp-for="IsYearGap" /> @Html.DisplayNameFor(model => model.IsYearGap)
                 </label>
             </div>
             <div class="form-group form-check">
@@ -24,7 +24,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="AcademicProjects" class="control-label"></label>
-                <input asp-for="AcademicProjects" class="form-control" />
+                <textarea size="30" asp-for="AcademicProjects" class="form-control" > </textarea>
                 <span asp-validation-for="AcademicProjects" class="text-danger"></span>
             </div>
             <div class="form-group">

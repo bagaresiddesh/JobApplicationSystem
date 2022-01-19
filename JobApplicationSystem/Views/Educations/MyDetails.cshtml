@@ -30,11 +30,11 @@
             <th>
                 @Html.DisplayNameFor(model => model.Percentage)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model) 
+{
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.EId)
@@ -48,11 +48,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Percentage)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="MyDetails" asp-route-eid="@item.EId">Details</a>
-            </td>
         </tr>
 }
     </tbody>
 </table>
+
+<a asp-action="Users" asp-controller="Other" >Home</a>

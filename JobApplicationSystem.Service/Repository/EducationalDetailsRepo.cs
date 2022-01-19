@@ -56,7 +56,13 @@ namespace JobApplicationSystem.Service.Repository
 
         public void Update(EducationalDetails educationalDetails)
         {
-            _applicationDbContext.Entry(educationalDetails).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            EducationalDetails oldData = _applicationDbContext.EducationalDetails.Where(x => x.EId == educationalDetails.EId).FirstOrDefault();
+            if(oldData != null)
+            {
+                oldData.IsActiveBacklogs = educationalDetails.IsActiveBacklogs;
+                oldData.IsYearGap = educationalDetails.IsYearGap;
+                oldData.AcademicProjects=educationalDetails.AcademicProjects;
+            }
             _applicationDbContext.SaveChanges();
         }
     }
