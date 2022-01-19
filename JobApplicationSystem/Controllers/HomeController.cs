@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace JobApplicationSystem.Controllers
 {
-
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

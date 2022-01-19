@@ -32,13 +32,6 @@ namespace JobApplicationSystem.Service.Repository
             return a;
         }
 
-        public void Delete(int id)
-        {
-            EducationalDetails temp = _applicationDbContext.EducationalDetails.Find(id);
-            _applicationDbContext.EducationalDetails.Remove(temp);
-            _applicationDbContext.SaveChanges();
-        }
-
         public IEnumerable<EducationalDetails> GetAll()
         {
             return _applicationDbContext.EducationalDetails.ToList();

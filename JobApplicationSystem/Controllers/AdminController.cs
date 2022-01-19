@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JobApplicationSystem.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class AdminController : Controller
     {
         public IActionResult Index()

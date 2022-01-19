@@ -10,7 +10,6 @@ namespace JobApplicationSystem.Service.Interface
         EducationalDetails GetByUserDetailsId(int uid);
         int Create(EducationalDetails educationalDetails);
         void Update(EducationalDetails educationalDetails);
-        void Delete(int Id);
         bool Any(int Id);
     }
 }

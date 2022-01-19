@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace JobApplicationSystem.Controllers
 {
+    [Authorize]
     public class AddressDetailsController : Controller
     {
         private readonly IAddressDetails _addressDetails;
@@ -128,34 +129,6 @@ namespace JobApplicationSystem.Controllers
             }
             return View(addressDetails);
         
-        }
-
-        // GET: AddressDetails/Delete/5
-        public IActionResult Delete(int id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var addressDetails = _addressDetails.GetById(id);
-            if (addressDetails == null)
-            {
-                return NotFound();
-            }
-
-            return View(addressDetails);
-        }
-
-        // POST: AddressDetails/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
-        {
-            var addressDetails = _addressDetails.GetById(id);
-            _addressDetails.Delete(id);
-
-            return RedirectToAction(nameof(Index));
         }
 
         private bool AddressDetailsExists(int id)

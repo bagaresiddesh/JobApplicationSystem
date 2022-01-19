@@ -36,13 +36,6 @@ namespace JobApplicationSystem.Service.Repository
             int id = target.UserDetailsId;        
         }
 
-        public void Delete(int Id)
-        {
-            DAL.Model.Education temp = _applicationDbContext.Education.Find(Id);
-            _applicationDbContext.Remove(temp);
-            _applicationDbContext.SaveChanges();
-        }
-
         public IEnumerable<Education> GetAll()
         {
             return _applicationDbContext.Education.ToList();
