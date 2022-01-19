@@ -158,7 +158,7 @@ namespace JobApplicationSystem.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Edit", "AddressDetails", new {id=id});
             }
             return View(userDetails);
         }

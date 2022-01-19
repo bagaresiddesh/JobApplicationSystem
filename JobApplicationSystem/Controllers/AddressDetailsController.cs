@@ -80,19 +80,19 @@ namespace JobApplicationSystem.Controllers
         }
 
         // GET: AddressDetails/Edit/5
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int id,int eid)
         {
-            if (id == null)
+            if (id != 0 && eid == 0)
             {
-                return NotFound();
+                var addressDetails = _addressDetails.GetByUserDetailsId(id);
+                return View(addressDetails);
             }
-
-            var addressDetails = _addressDetails.GetById(id);
-            if (addressDetails == null)
+            else if (id == 0 && eid != 0)
             {
-                return NotFound();
+                var addressDetails = _addressDetails.GetById(eid);
+                return View(addressDetails);
             }
-            return View(addressDetails);
+            return View();
         }
 
         // POST: AddressDetails/Edit/5
@@ -124,9 +124,10 @@ namespace JobApplicationSystem.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Edit", "EducationalDetails", new { id = id });
             }
             return View(addressDetails);
+        
         }
 
         // GET: AddressDetails/Delete/5
