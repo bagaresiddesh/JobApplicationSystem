@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace JobApplicationSystem.Controllers
 {
+    [Authorize]
     public class AddressDetailsController : Controller
     {
         private readonly IAddressDetails _addressDetails;
@@ -80,19 +81,19 @@ namespace JobApplicationSystem.Controllers
         }
 
         // GET: AddressDetails/Edit/5
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int id,int eid)
         {
-            if (id == null)
+            if (id != 0 && eid == 0)
             {
-                return NotFound();
+                var addressDetails = _addressDetails.GetByUserDetailsId(id);
+                return View(addressDetails);
             }
-
-            var addressDetails = _addressDetails.GetById(id);
-            if (addressDetails == null)
+            else if (id == 0 && eid != 0)
             {
-                return NotFound();
+                var addressDetails = _addressDetails.GetById(eid);
+                return View(addressDetails);
             }
-            return View(addressDetails);
+            return View();
         }
 
         // POST: AddressDetails/Edit/5
@@ -124,37 +125,10 @@ namespace JobApplicationSystem.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Edit", "EducationalDetails", new { id = id });
             }
             return View(addressDetails);
-        }
-
-        // GET: AddressDetails/Delete/5
-        public IActionResult Delete(int id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var addressDetails = _addressDetails.GetById(id);
-            if (addressDetails == null)
-            {
-                return NotFound();
-            }
-
-            return View(addressDetails);
-        }
-
-        // POST: AddressDetails/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
-        {
-            var addressDetails = _addressDetails.GetById(id);
-            _addressDetails.Delete(id);
-
-            return RedirectToAction(nameof(Index));
+        
         }
 
         private bool AddressDetailsExists(int id)

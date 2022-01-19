@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace JobApplicationSystem.Controllers
 {
+    [Authorize]
     public class EducationalDetailsController : Controller
     {
         private readonly IEducationalDetails _educationalDetails;
@@ -34,8 +35,8 @@ namespace JobApplicationSystem.Controllers
             }
             else if (id == 0 && uid != 0)
             {
-                var addressDetails = _educationalDetails.GetByUserDetailsId(uid);
-                return View(addressDetails);
+                var educationalDetails = _educationalDetails.GetByUserDetailsId(uid);
+                return View(educationalDetails);
             }
             return View();
         }
@@ -83,19 +84,20 @@ namespace JobApplicationSystem.Controllers
         }
 
         // GET: EducationalDetails/Edit/5
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int id,int eid)
         {
-            if (id == null)
+            if (eid != 0 && id == 0)
             {
-                return NotFound();
+                var educationalDetails = _educationalDetails.GetById(eid);
+                return View(educationalDetails);
             }
-
-            var educationalDetails = _educationalDetails.GetById(id);
-            if (educationalDetails == null)
+            ////////////////////////////////////////////////////////////////
+            else if (eid == 0 && id != 0)
             {
-                return NotFound();
+                var educationalDetails = _educationalDetails.GetByUserDetailsId(id);
+                return View(educationalDetails);
             }
-            return View(educationalDetails);
+            return View();
         }
 
         // POST: EducationalDetails/Edit/5
@@ -127,38 +129,10 @@ namespace JobApplicationSystem.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Users","Other");
             }
             return View(educationalDetails);
-        }
-
-        // GET: EducationalDetails/Delete/5
-        public IActionResult Delete(int id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var educationalDetails = _educationalDetails.GetById(id);
-            if (educationalDetails == null)
-            {
-                return NotFound();
-            }
-
-            return View(educationalDetails);
-        }
-
-        // POST: EducationalDetails/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
-        {
-            var educationalDetails = _educationalDetails.GetById(id);
-            _educationalDetails.Delete(id);
-
-            return RedirectToAction(nameof(Index));
-        }
+        }   
 
         private bool EducationalDetailsExists(int id)
         {

@@ -10,6 +10,7 @@ using JobApplicationSystem.Areas.Identity.Data;
 
 namespace JobApplicationSystem.Controllers
 {
+    [Authorize]
     public class EducationsController : Controller
     {
         private readonly IEducation _education;
@@ -143,34 +144,6 @@ namespace JobApplicationSystem.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(education);
-        }
-
-        // GET: Educations/Delete/5
-        public IActionResult Delete(int id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var education = _education.GetById(id);
-            if (education == null)
-            {
-                return NotFound();
-            }
-
-            return View(education);
-        }
-
-        // POST: Educations/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
-        {
-            var education =  _education.GetById(id);
-            _education.Delete(id);
-
-            return RedirectToAction(nameof(Index));
         }
 
         private bool EducationExists(int id)

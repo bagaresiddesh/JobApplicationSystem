@@ -10,7 +10,6 @@ namespace JobApplicationSystem.Service.Interface
         AddressDetails GetByUserDetailsId(int UId);
         void Create(AddressDetails addressDetails);
         void Update(AddressDetails addressDetails);
-        void Delete(int Id);
         bool Any(int Id);
     }
 }

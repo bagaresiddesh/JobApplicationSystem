@@ -4,9 +4,11 @@ using JobApplicationSystem.DAL.Model;
 using JobApplicationSystem.Service.Interface;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JobApplicationSystem.Controllers
 {
+    [Authorize]
     public class UserDetailsController : Controller
     {
         private readonly IUserDetails _userDetails;
@@ -158,7 +160,7 @@ namespace JobApplicationSystem.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Edit", "AddressDetails", new {id=id});
             }
             return View(userDetails);
         }

@@ -10,7 +10,6 @@ namespace JobApplicationSystem.Service.Interface
         Education GetByEId(int Id);
         void Create(Education education);
         void Update(Education education);
-        void Delete(int Id);
         bool Any(int Id);
     }
 }

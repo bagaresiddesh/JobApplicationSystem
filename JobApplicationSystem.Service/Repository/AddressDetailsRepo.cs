@@ -29,13 +29,6 @@ namespace JobApplicationSystem.Service.Repository
             _applicationDbContext.SaveChanges();
         }
 
-        public void Delete(int id)
-        {
-            AddressDetails temp = _applicationDbContext.AddressDetails.Find(id);
-            _applicationDbContext.Remove(temp);
-            _applicationDbContext.SaveChanges();
-        }
-
         public IEnumerable<AddressDetails> GetAll()
         {
             return _applicationDbContext.AddressDetails.ToList();
