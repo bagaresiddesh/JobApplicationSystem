@@ -4,7 +4,6 @@ using JobApplicationSystem.DAL.Model;
 using JobApplicationSystem.Service.Interface;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Authorization;
 
 namespace JobApplicationSystem.Controllers
 {
@@ -29,6 +28,10 @@ namespace JobApplicationSystem.Controllers
             if (sortOrder == "Date")
             {
                 result = result.OrderByDescending(x => x.DateOfBirth).ToList();
+            }
+            if (sortOrder == "date_desc")
+            {
+                result = result.OrderBy(x => x.DateOfBirth).ToList();
             }
 
             //ViewData["Gender"] = gender == "male" ? "female" : "male";
@@ -80,6 +83,10 @@ namespace JobApplicationSystem.Controllers
         // GET: UserDetails/Create
         public IActionResult Create()
         {
+            if (ViewBag.Id != null)
+            {
+                return Content("You have already applied!");
+            }
             return View();
         }
 
@@ -90,6 +97,11 @@ namespace JobApplicationSystem.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Id,FirstName,MiddleName,LastName,Gender,DateOfBirth,Email,Phone")] UserDetails userDetails)
         {
+            if(ViewBag.Id!=null)
+            {
+                return Content("You have already applied!");
+            }
+
             if (ModelState.IsValid)
             {
                 int newkey = _userDetails.Create(userDetails);
@@ -182,15 +194,6 @@ namespace JobApplicationSystem.Controllers
         {
             return _userDetails.Any(id);
         }
-
-        public int GetIdByMail(string mail)
-        {
-            var userDetails= _userDetails.GetAll().ToList();
-            UserDetails target = userDetails.FirstOrDefault(x => x.Email == mail);
-
-            return target.Id;
-        }
-
 
     }
 }

@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "User Control";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/client.js"></script>
+    <script src="js/templates.js"></script>
+    <script src="js/student-dashboard.js"></script>
+</head>
+<body>
+
+    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+        <ul class="navbar-nav flex-grow-1">
+            <li class="nav-item">
+                @if (ViewBag.Id != 0)
+                {
+                    <a class="nav-link text-dark" onclick="javascript: return myFunction();">New Application</a>
+                }
+                else
+                {
+                    <a class="nav-link text-dark" asp-controller="UserDetails"  asp-action="Create">New Application</a>
+                }
+            </li>
+            <li class="nav-item">
+                @if(ViewBag.Id!=0)
+                {
+                    <a class="nav-link text dark" asp-controller="UserDetails" asp-action="Details" asp-route-id=@ViewBag.Id>View Details</a>
+                }
+                else
+                {
+                    <a class="nav-link text dark" onclick="javascript :return NoApplication();">View Details</a>
+                }
+            </li>
+            <li class="nav-item">
+                @if(ViewBag.Id!=0)
+                {
+                    <a class="nav-link text dark" asp-controller="UserDetails" asp-action="Edit" asp-route-id=@ViewBag.Id>Edit Details</a>
+                }
+                else
+                {
+                    <a class="nav-link text dark" onclick="javascript :return NoApplication();">Edit Details</a>
+                }
+            </li>
+            <li>
+                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                </form>
+            </li>
+
+        </ul>
+    </div>
+    <script>
+        function myFunction() 
+        {
+            alert("You have already applied!..");
+            return false;
+        }
+
+        function NoApplication() 
+        {
+            alert("You have no application!..");
+            return false;
+        }
+    </script>
+</body>
+</html>

@@ -4,6 +4,10 @@
     ViewData["Title"] = "Details";
 }
 
+<p>
+    <a class="btn btn-primary btn-sm" asp-action="Admins" asp-controller="Admin">Back</a>
+</p>
+
 <div>
     <h4>Address Details</h4>
     <hr />
@@ -44,15 +48,8 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.AddressLine2)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserDetails)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserDetails.Email)
-        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> | 
     <a asp-action="Details" asp-controller="EducationalDetails" asp-route-uid="@Model.UserDetailsId">Educational Details</a>
 </div>

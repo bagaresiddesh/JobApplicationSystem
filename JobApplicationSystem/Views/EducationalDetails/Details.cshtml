@@ -4,7 +4,11 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h4>Educational Details</h4>
+
+<p>
+    <a class="btn btn-primary btn-sm" asp-action="Admins" asp-controller="Admin">Back</a>
+</p>
 
 <div>
     <h4>EducationalDetails</h4>
@@ -28,15 +32,8 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.AcademicProjects)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserDetails)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserDetails.Email)
-        </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.EId">Edit</a> | 
-    <a asp-action="Details" asp-controller="Educations" asp-route-id="@Model.EId">Qualification Details</a>
+<div> 
+    <a asp-action="MyDetails" asp-controller="Educations" asp-route-eid="@Model.EId">Qualification Details</a>
 </div>

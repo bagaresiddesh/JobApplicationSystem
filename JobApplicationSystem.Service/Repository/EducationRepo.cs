@@ -60,7 +60,13 @@ namespace JobApplicationSystem.Service.Repository
 
         public void Update(Education education)
         {
-            _applicationDbContext.Entry(education).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            Education oldData=_applicationDbContext.Education.Where(x=>x.Id==education.Id).FirstOrDefault();
+            if (oldData!=null)
+            {
+                oldData.Qualification = education.Qualification;
+                oldData.PassingYear = education.PassingYear;
+                oldData.Percentage = education.Percentage;
+            }
             _applicationDbContext.SaveChanges();
         }
     }

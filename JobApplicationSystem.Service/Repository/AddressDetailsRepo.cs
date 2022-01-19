@@ -53,7 +53,16 @@ namespace JobApplicationSystem.Service.Repository
 
         public void Update(AddressDetails addressDetails)
         {
-            _applicationDbContext.Entry(addressDetails).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            AddressDetails oldData =_applicationDbContext.AddressDetails.Where(x=>x.Id == addressDetails.Id).FirstOrDefault();
+            if (oldData != null)
+            {
+                oldData.Country = addressDetails.Country;
+                oldData.State = addressDetails.State;
+                oldData.City = addressDetails.City;
+                oldData.PostalCode = addressDetails.PostalCode;
+                oldData.AddressLine1 = addressDetails.AddressLine1;
+                oldData.AddressLine2 = addressDetails.AddressLine2;
+            }
             _applicationDbContext.SaveChanges();
         }
     }
