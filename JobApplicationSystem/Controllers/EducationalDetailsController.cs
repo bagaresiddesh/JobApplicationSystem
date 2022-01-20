@@ -28,11 +28,13 @@ namespace JobApplicationSystem.Controllers
         // GET: EducationalDetails/Details/5
         public IActionResult Details(int id,int uid)
         {
+            //recieving id from Index EducationalDetails
             if (id != 0 && uid == 0)
             {
                 var educationalDetails = _educationalDetails.GetById(id);
                 return View(educationalDetails);
             }
+            //recieving uid from View of AddressDetails
             else if (id == 0 && uid != 0)
             {
                 var educationalDetails = _educationalDetails.GetByUserDetailsId(uid);
@@ -48,8 +50,6 @@ namespace JobApplicationSystem.Controllers
         }
 
         // POST: EducationalDetails/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Id,UserDetailsId,IsYearGap,IsActiveBacklogs,AcademicProjects")] EducationalDetails educationalDetails)
@@ -66,11 +66,13 @@ namespace JobApplicationSystem.Controllers
                     AcademicProjects = educationalDetails.AcademicProjects
                 };
 
+                //Getting primary key i.e. EId 
                 int Ekey = _educationalDetails.Create(temp);
 
+                //Passing EId as Foreig key to Educations
                 TempData["EKey"] = Ekey;
 
-                //counter to accept 3 qualification forms
+                //counter to accept 4 qualification(Educations) forms
                 int count = 4;
                 TempData["Count"] = count;
                 ViewBag.Count = count;
@@ -86,12 +88,14 @@ namespace JobApplicationSystem.Controllers
         // GET: EducationalDetails/Edit/5
         public IActionResult Edit(int id,int eid)
         {
+            //Getting id from Edit of AddressDetails
             if (eid != 0 && id == 0)
             {
                 var educationalDetails = _educationalDetails.GetById(eid);
                 return View(educationalDetails);
             }
-            ////////////////////////////////////////////////////////////////
+            //Getting eid from Index of EducationalDetails
+            //Not Working
             else if (eid == 0 && id != 0)
             {
                 var educationalDetails = _educationalDetails.GetByUserDetailsId(id);
@@ -101,8 +105,6 @@ namespace JobApplicationSystem.Controllers
         }
 
         // POST: EducationalDetails/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("EId,UserDetailsId,IsYearGap,IsActiveBacklogs,AcademicProjects")] EducationalDetails educationalDetails)

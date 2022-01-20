@@ -5,8 +5,6 @@ using JobApplicationSystem.DAL.Model;
 using System.Collections.Generic;
 using JobApplicationSystem.Service.Interface;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using JobApplicationSystem.Areas.Identity.Data;
 
 namespace JobApplicationSystem.Controllers
 {
@@ -28,8 +26,8 @@ namespace JobApplicationSystem.Controllers
 
         // GET: Educations/Details/5
         public IActionResult MyDetails(int id,int eid)
-        
         {
+            //Getting id from Index of Educations
             if (id != 0 && eid == 0)
             {
                 var education = _education.GetAll().Where(x => x.EId == id).ToList();
@@ -40,6 +38,7 @@ namespace JobApplicationSystem.Controllers
                 }
                 return View(education);                
             }
+            //Getting eid from View of EducationalDetails
             else if (id == 0 && eid != 0)
             {
                 var education = _education.GetAll().Where(x => x.EId == eid).ToList();
@@ -56,16 +55,16 @@ namespace JobApplicationSystem.Controllers
         }
 
         // POST: Educations/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Id,EId,Qualification,PassingYear,Percentage")] Education education)
         {
             if (ModelState.IsValid)
             {
+                //Getting Foreign key i.e. EId
                 int newkey = (int)TempData["EKey"];
 
+                //Getting Count to accept Qualifications forms 4 times
                 int count = (int)TempData["Count"];
 
                 if (count > 0)
@@ -113,8 +112,6 @@ namespace JobApplicationSystem.Controllers
         }
 
         // POST: Educations/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("Id,EId,Qualification,PassingYear,Percentage")] Education education)

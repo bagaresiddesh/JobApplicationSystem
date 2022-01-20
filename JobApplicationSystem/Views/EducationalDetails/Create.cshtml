@@ -23,16 +23,30 @@
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="AcademicProjects" class="control-label"></label>
-                <textarea size="30" asp-for="AcademicProjects" class="form-control" > </textarea>
-                <span asp-validation-for="AcademicProjects" class="text-danger"></span>
+                <label>Academic Projects</label><br />
+                <textarea onkeyup="textCounter(this,'counter',30);" id="message"> </textarea><br />
+                <input disabled  maxlength="2" size="2" value="30" id="counter">
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Next" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
+
+<script>
+function textCounter(field,field2,maxlimit)
+{
+ var countfield = document.getElementById(field2);
+ if ( field.value.length > maxlimit ) {
+  field.value = field.value.substring( 0, maxlimit );
+  return false;
+ } else {
+  countfield.value = maxlimit - field.value.length;
+ }
+}
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
