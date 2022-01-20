@@ -27,12 +27,14 @@ namespace JobApplicationSystem.Service.Repository
             return a;
         }
 
+        //Customized cascade delete function
          public void MyDelete(int id)
         {
             UserDetails temp = _applicationDbContext.UserDetails.Where(x=>x.Id==id).FirstOrDefault();
             AddressDetails target = _applicationDbContext.AddressDetails.Where(x => x.UserDetailsId == id).FirstOrDefault();            
             EducationalDetails target2 = _applicationDbContext.EducationalDetails.Where(x => x.UserDetailsId == id).FirstOrDefault();
 
+            //using flag to iterate delete multiple values in Educations table 
             int flag=0;
             while (flag != 1)
             {

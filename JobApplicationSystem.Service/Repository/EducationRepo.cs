@@ -46,6 +46,7 @@ namespace JobApplicationSystem.Service.Repository
             return _applicationDbContext.Education.FirstOrDefault(x => x.Id == Id);
         }
 
+        //returns object by foreign key i.e. EId
         public Education GetByEId(int Id)
         {
             return _applicationDbContext.Education.FirstOrDefault(x => x.EId == Id);
@@ -53,6 +54,7 @@ namespace JobApplicationSystem.Service.Repository
 
         public void Update(Education education)
         {
+            //Getting old data from the object and updating its properties 
             Education oldData=_applicationDbContext.Education.Where(x=>x.Id==education.Id).FirstOrDefault();
             if (oldData!=null)
             {

@@ -22,6 +22,8 @@ namespace JobApplicationSystem.Controllers
         public IActionResult Index(string search)
         {
             List<AddressDetails> result = _addressDetails.GetAll().ToList();
+
+            //Searching City/State/Country
             if (search != null)
             {
                 result = result.Where(x => x.City.Contains(search) || x.State.Contains(search) || x.Country.Contains(search)).ToList();
@@ -32,11 +34,13 @@ namespace JobApplicationSystem.Controllers
         // GET: AddressDetails/Details/5
         public IActionResult Details(int id,int eid)
         {
+            //recieving id from Index of AddressDetails
             if (id != 0 && eid == 0)
             {
                 var addressDetails = _addressDetails.GetById(id);
                 return View(addressDetails);
             }
+            //recieving eid from Details of UserDetails
             else if(id == 0 && eid!=0)
             {
                 var addressDetails= _addressDetails.GetByUserDetailsId(eid);
@@ -52,14 +56,13 @@ namespace JobApplicationSystem.Controllers
         }
 
         // POST: AddressDetails/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Id,UserDetailsId,Country,State,City,PostalCode,AddressLine1,AddressLine2")] AddressDetails addressDetails)
         {
             if (ModelState.IsValid)
             {
+                //Getting Foreign key form UserDetails 
                 int newkey = (int)TempData["NewKey"];
 
                 AddressDetails temp = new AddressDetails
@@ -83,11 +86,13 @@ namespace JobApplicationSystem.Controllers
         // GET: AddressDetails/Edit/5
         public IActionResult Edit(int id,int eid)
         {
+            //recieving id from Edit of UserDetails
             if (id != 0 && eid == 0)
             {
                 var addressDetails = _addressDetails.GetByUserDetailsId(id);
                 return View(addressDetails);
             }
+            //recieving id from Index of AddressDetails
             else if (id == 0 && eid != 0)
             {
                 var addressDetails = _addressDetails.GetById(eid);
@@ -97,8 +102,6 @@ namespace JobApplicationSystem.Controllers
         }
 
         // POST: AddressDetails/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("Id,UserDetailId,Country,State,City,PostalCode,AddressLine1,AddressLine2")] AddressDetails addressDetails)
@@ -127,8 +130,7 @@ namespace JobApplicationSystem.Controllers
                 }
                 return RedirectToAction("Edit", "EducationalDetails", new { id = id });
             }
-            return View(addressDetails);
-        
+            return View(addressDetails);       
         }
 
         private bool AddressDetailsExists(int id)

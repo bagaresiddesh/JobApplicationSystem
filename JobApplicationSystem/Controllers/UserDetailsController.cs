@@ -21,10 +21,12 @@ namespace JobApplicationSystem.Controllers
         // GET: UserDetails
         public IActionResult Index(string search, string sortOrder, string delete,string gender)
         {
+            //Total to display total applications on index view
             ViewData["Total"] = _userDetails.Count();
 
             List<UserDetails> result = _userDetails.GetAll().ToList();
 
+            //DatesortParam recieves parameter from index view to sort result date-wise
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
 
             if (sortOrder == "Date")
@@ -36,8 +38,7 @@ namespace JobApplicationSystem.Controllers
                 result = result.OrderBy(x => x.DateOfBirth).ToList();
             }
 
-            //ViewData["Gender"] = gender == "male" ? "female" : "male";
-
+            //Filtering the resul set by gender 
             if (gender =="Male")
             {
                 result = result.Where(x => x.Gender.Equals(Gender.male)).ToList();
@@ -51,16 +52,16 @@ namespace JobApplicationSystem.Controllers
                 result = result.Where(x => x.Gender.Equals(Gender.other)).ToList();
             }
 
+            //Searching FirstName/LastName and Email
             if (search != null)
             {
                 result = result.Where(x => x.FirstName.Contains(search) || x.LastName.Contains(search) || x.Email.Contains(search)).ToList();
             }
 
+            //getting the id for object to be deleted
             if (delete != null)
             {
                 return RedirectToAction("Delete", new { id = delete });
-              //  int deleteid = Convert.ToInt32(delete);
-              //  DeleteConfirmed(deleteid);
             }
             return View(result);   
         }
@@ -85,6 +86,7 @@ namespace JobApplicationSystem.Controllers
         // GET: UserDetails/Create
         public IActionResult Create()
         {
+            //Checking whether user has applied only once 
             if (ViewBag.Id != null)
             {
                 return Content("You have already applied!");
@@ -93,8 +95,6 @@ namespace JobApplicationSystem.Controllers
         }
 
         // POST: UserDetails/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Id,FirstName,MiddleName,LastName,Gender,DateOfBirth,Email,Phone")] UserDetails userDetails)
@@ -132,8 +132,6 @@ namespace JobApplicationSystem.Controllers
         }
 
         // POST: UserDetails/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("Id,FirstName,MiddleName,LastName,Gender,DateOfBirth,Email,Phone")] UserDetails userDetails)
@@ -182,6 +180,7 @@ namespace JobApplicationSystem.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
+            //Performing delete which will further delete all the references of the object
             var userDetails = _userDetails.GetById(id);
             if(userDetails == null)
             {

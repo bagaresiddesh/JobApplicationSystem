@@ -24,17 +24,22 @@ namespace JobApplicationSystem.Controllers
         {
             int id=0;
 
+            //Getting username(mail) where user is logged in 
             var username = User.Identity.Name;
 
+
             var userDetails = _userDetails.GetAll().ToList();
+
+            //Searching username(mail) in our UserDetails records
             var target = userDetails.FirstOrDefault(x => x.Email == username);
 
-            if(target != null)
+            //If username(mail) found
+            if (target != null)
             {
                 id = target.Id;
             }
-            
 
+            //Sending this Id of username(mail) to UserDetails 
             ViewBag.Id = id;    
 
             return View();

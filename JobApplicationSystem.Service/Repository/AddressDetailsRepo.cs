@@ -39,6 +39,7 @@ namespace JobApplicationSystem.Service.Repository
             return _applicationDbContext.AddressDetails.FirstOrDefault(x => x.Id == id);
         }
 
+        //returns object by foreign key i.e. UserDetailsId
         public AddressDetails GetByUserDetailsId(int uid)
         {
             return _applicationDbContext.AddressDetails.FirstOrDefault(x => x.UserDetailsId == uid);
@@ -46,6 +47,7 @@ namespace JobApplicationSystem.Service.Repository
 
         public void Update(AddressDetails addressDetails)
         {
+            //getting old data from object and updating its properties
             AddressDetails oldData =_applicationDbContext.AddressDetails.Where(x=>x.Id == addressDetails.Id).FirstOrDefault();
             if (oldData != null)
             {
