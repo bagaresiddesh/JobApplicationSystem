@@ -29,7 +29,6 @@ namespace JobApplicationSystem.DAL.Model
 
         [Required]
         [DataType(DataType.Date)]
-        [Range(typeof(DateTime), "01/01/1980", "01/01/2000")]
         [DisplayName("Date of Birth")]
         public DateTime DateOfBirth { get; set; }
 
