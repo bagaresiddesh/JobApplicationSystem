@@ -57,7 +57,7 @@ namespace JobApplicationSystem.Controllers
         // POST: Educations/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,EId,Qualification,PassingYear,Percentage")] Education education)
+        public IActionResult Create([Bind("Id,EId,Qualification,PassingYear,Percentage")] Education education,int flag)
         {
             if (ModelState.IsValid)
             {
@@ -85,6 +85,12 @@ namespace JobApplicationSystem.Controllers
                     ViewBag.Count = count;
 
                     int Id=(int)TempData["UserDetailsId"];
+
+                    if (flag == 1)
+                    {
+                        return RedirectToAction("Details", "UserDetails", new { id = Id }); ;
+                    }
+
                     if (count == 0)
                     {
                         return RedirectToAction("Details", "UserDetails", new {id=Id});
