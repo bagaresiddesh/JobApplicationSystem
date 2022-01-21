@@ -19,10 +19,24 @@ namespace JobApplicationSystem.Controllers
         }
 
         // GET: EducationalDetails
-        public IActionResult Index()
+        [Authorize(Roles = "Admin")]
+        public IActionResult Index(string project)
         {
-            List<EducationalDetails> educationalDetails = _educationalDetails.GetAll().ToList();
-            return View(educationalDetails);
+            List<EducationalDetails> result = _educationalDetails.GetAll().ToList();
+
+            ViewData["Project"] = project == "Yes" ? "No" : "Yes";
+            
+            if(project == "Yes")
+            {
+                result = result.Where(x => x.AcademicProjects != null).ToList();
+            }
+            
+            if (project == "No")
+            {
+                result = result.Where(x => x.AcademicProjects == null).ToList();
+            }
+            
+            return View(result);
         }
 
         // GET: EducationalDetails/Details/5

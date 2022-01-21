@@ -1,13 +1,15 @@
 using JobApplicationSystem.DAL.Data;
 using JobApplicationSystem.Service.Interface;
 using JobApplicationSystem.Service.Repository;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using System;
 
 namespace JobApplicationSystem
 {
@@ -25,12 +27,13 @@ namespace JobApplicationSystem
         {
             services.AddControllersWithViews();
             services.AddDbContext<ApplicationDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("Connection")));
-            services.AddRazorPages();
-            
+
             services.AddScoped<IUserDetails, UserDetailsRepo>();
             services.AddScoped<IAddressDetails, AddressDetailsRepo>();
             services.AddScoped<IEducationalDetails, EducationalDetailsRepo>();
             services.AddScoped<IEducation, EducationRepo>();
+
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

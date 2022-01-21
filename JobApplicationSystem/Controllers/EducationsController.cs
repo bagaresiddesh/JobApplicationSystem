@@ -18,6 +18,7 @@ namespace JobApplicationSystem.Controllers
             _education = education;
         }
         // GET: Educations
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             List<Education> education = _education.GetAll().ToList();
@@ -93,7 +94,7 @@ namespace JobApplicationSystem.Controllers
 
                     if (count == 0)
                     {
-                        return RedirectToAction("Details", "UserDetails", new {id=Id});
+                        return RedirectToAction("Users", "Other");
                     }
                     return RedirectToAction("Create", "Educations");
                 }

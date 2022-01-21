@@ -18,6 +18,7 @@ namespace JobApplicationSystem.Controllers
             _userDetails = userDetails;
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: UserDetails
         public IActionResult Index(string search, string sortOrder, string delete,string gender)
         {
@@ -63,6 +64,7 @@ namespace JobApplicationSystem.Controllers
             {
                 return RedirectToAction("Delete", new { id = delete });
             }
+
             return View(result);   
         }
 
@@ -163,6 +165,7 @@ namespace JobApplicationSystem.Controllers
             return View(userDetails);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: UserDetails/Delete/5
         public IActionResult Delete(int id)
         {

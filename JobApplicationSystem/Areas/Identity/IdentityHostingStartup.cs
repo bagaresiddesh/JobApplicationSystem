@@ -1,6 +1,7 @@
 ﻿using System;
 using JobApplicationSystem.Areas.Identity.Data;
 using JobApplicationSystem.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -17,11 +18,11 @@ namespace JobApplicationSystem.Areas.Identity
         {
             builder.ConfigureServices((context, services) => {
                 services.AddDbContext<JobApplicationSystemContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("JobApplicationSystemContextConnection")));
+                   options.UseSqlServer(
+                   context.Configuration.GetConnectionString("JobApplicationSystemContextConnection")));
 
-                services.AddDefaultIdentity<JobApplicationSystemUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<JobApplicationSystemContext>();
+                services.AddDefaultIdentity<JobApplicationSystemUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>().AddEntityFrameworkStores<JobApplicationSystemContext>();
+               
             });
         }
     }

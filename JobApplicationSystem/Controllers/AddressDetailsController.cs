@@ -19,6 +19,7 @@ namespace JobApplicationSystem.Controllers
         }
 
         // GET: AddressDetails
+        [Authorize(Roles = "Admin")]
         public IActionResult Index(string search)
         {
             List<AddressDetails> result = _addressDetails.GetAll().ToList();
@@ -128,7 +129,7 @@ namespace JobApplicationSystem.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Edit", "EducationalDetails", new { id = id });
+                return RedirectToAction("Users","Other");
             }
             return View(addressDetails);       
         }
